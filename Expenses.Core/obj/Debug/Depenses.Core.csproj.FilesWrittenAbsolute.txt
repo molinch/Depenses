@@ -1,0 +1,11 @@
+/Users/benjamin/Projects/Depenses/Depenses.Core/obj/Debug/.NETPortable,Version=v4.5,Profile=Profile78.AssemblyAttribute.cs
+/Users/benjamin/Projects/Depenses/Depenses.Core/bin/Debug/Cirrious.CrossCore.dll
+/Users/benjamin/Projects/Depenses/Depenses.Core/bin/Debug/Cirrious.MvvmCross.Localization.dll
+/Users/benjamin/Projects/Depenses/Depenses.Core/bin/Debug/Cirrious.MvvmCross.dll
+/Users/benjamin/Projects/Depenses/Depenses.Core/bin/Debug/Depenses.Core.dll.mdb
+/Users/benjamin/Projects/Depenses/Depenses.Core/bin/Debug/Depenses.Core.dll
+/Users/benjamin/Projects/Depenses/Depenses.Core/obj/Debug/Depenses.Core.dll
+/Users/benjamin/Projects/Depenses/Depenses.Core/obj/Debug/Depenses.Core.dll.mdb
+/Users/benjamin/Projects/Depenses/Depenses.Core/bin/Debug/Cirrious.MvvmCross.Plugins.Sqlite.dll
+/Users/benjamin/Projects/Depenses/Depenses.Core/bin/Debug/SQLite.Net.dll
+/Users/benjamin/Projects/Depenses/Depenses.Core/bin/Debug/SQLite.Net.Async.dll
