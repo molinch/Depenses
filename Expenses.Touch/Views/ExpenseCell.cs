@@ -13,8 +13,8 @@ namespace Depenses.Touch
     {
         public static NSString Identifier = new NSString("DepenseCell");
 
-        private UILabel _sophAmount;
-        private UILabel _benAmount;
+        private UILabel _womanAmount;
+        private UILabel _menAmount;
         private UILabel _details;
         private UILabel _date;
 
@@ -28,13 +28,13 @@ namespace Depenses.Touch
 
         void CreateControls()
         {
-            _sophAmount = new UILabel
+            _womanAmount = new UILabel
             {
 //                Font = UIFont.SystemFontOfSize(12),
                 TextColor = UIColor.FromRGB(243, 123, 176),
             };
 
-            _benAmount = new UILabel
+            _menAmount = new UILabel
             {
 //                Font = UIFont.SystemFontOfSize(12),
                 TextColor = UIColor.FromRGB(0, 133, 202)
@@ -42,7 +42,7 @@ namespace Depenses.Touch
             _details = new UILabel { Lines = 0 };
             _date = new UILabel();
 
-            ContentView.AddSubviews(_sophAmount, _benAmount, _details, _date);
+            ContentView.AddSubviews(_womanAmount, _menAmount, _details, _date);
         }
 
         private DateTime _depenseDate;
@@ -60,8 +60,8 @@ namespace Depenses.Touch
         {
             this.DelayBind(() => {
                 var set = this.CreateBindingSet<ExpenseCell, Expense>();
-                set.Bind(_sophAmount).For(p => p.Text).To(vm => vm.WomanExpense);
-                set.Bind(_benAmount).For(p => p.Text).To(vm => vm.ManExpense);
+                set.Bind(_womanAmount).For(p => p.Text).To(vm => vm.WomanExpense);
+                set.Bind(_menAmount).For(p => p.Text).To(vm => vm.ManExpense);
                 set.Bind(this).For(p => p.DepenseDate).To(vm => vm.ExpenseDate);
                 set.Bind(_details).For(p => p.Text).To(vm => vm.Details);
                 set.Apply();
@@ -80,18 +80,18 @@ namespace Depenses.Touch
                 _date.AtBottomOf(ContentView, margin),
                 _date.WithSameWidth(ContentView).WithMultiplier(1/3f),
 
-                _benAmount.ToRightOf(_date, margin),
-                _benAmount.WithSameTop(_date),
-                _benAmount.WithSameBottom(_date),
-                _benAmount.WithSameWidth(ContentView).WithMultiplier(1/6f),
+                _menAmount.ToRightOf(_date, margin),
+                _menAmount.WithSameTop(_date),
+                _menAmount.WithSameBottom(_date),
+                _menAmount.WithSameWidth(ContentView).WithMultiplier(1/6f),
 
-                _sophAmount.ToRightOf(_benAmount, margin),
-                _sophAmount.WithSameTop(_benAmount),
-                _sophAmount.WithSameBottom(_date),
-                _sophAmount.WithSameWidth(ContentView).WithMultiplier(1/6f),
+                _womanAmount.ToRightOf(_menAmount, margin),
+                _womanAmount.WithSameTop(_menAmount),
+                _womanAmount.WithSameBottom(_date),
+                _womanAmount.WithSameWidth(ContentView).WithMultiplier(1/6f),
 
-                _details.ToRightOf(_sophAmount, margin),
-                _details.WithSameTop(_sophAmount),
+                _details.ToRightOf(_womanAmount, margin),
+                _details.WithSameTop(_womanAmount),
                 _details.AtBottomOf(ContentView, margin),
                 _details.AtRightOf(ContentView, margin)
             );
