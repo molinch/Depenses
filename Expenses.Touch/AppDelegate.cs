@@ -5,6 +5,8 @@ using Foundation;
 using UIKit;
 using SQLite.Net.Interop;
 using SQLite.Net.Platform.XamarinIOS;
+using Expenses.Core;
+using Expenses.Touch;
 
 namespace Depenses.Touch
 {
@@ -23,7 +25,9 @@ namespace Depenses.Touch
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
 
-            Mvx.RegisterType<ISQLitePlatform, SQLitePlatformIOS>(); 
+//            Mvx.RegisterType<ISQLitePlatform, SQLitePlatformIOS>(); 
+            Mvx.RegisterType<IDbService, DbService>();
+            Mvx.RegisterType<ISpecialFolderService, SpecialFolderService>();
 
             _window.MakeKeyAndVisible();
 

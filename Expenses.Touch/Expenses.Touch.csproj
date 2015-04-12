@@ -159,6 +159,8 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Views\ExpenseCell.cs" />
     <Compile Include="Views\ExpenseView.cs" />
+    <Compile Include="Services\DbService.cs" />
+    <Compile Include="Services\SpecialFolderService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -166,5 +168,8 @@
       <Project>{F433FBDE-0327-477D-A33F-6831BD7AFF8E}</Project>
       <Name>Expenses.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

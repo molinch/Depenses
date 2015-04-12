@@ -8,11 +8,11 @@ namespace Depenses.Core.ViewModels
 {
     public class ExpenseViewModel : MvxViewModel
     {
-        private readonly IExpenseService _depenseService;
+        private readonly IExpenseService _expenseService;
 
-        public ExpenseViewModel(IExpenseService depenseService)
+        public ExpenseViewModel(IExpenseService expenseService)
         {
-            _depenseService = depenseService;
+            _expenseService = expenseService;
 
             _currentDepense = new Expense();
             LoadData();
@@ -20,13 +20,10 @@ namespace Depenses.Core.ViewModels
 
         private async void LoadData()
         {
-//            GetDeps().Select(c =>
-//                {
-//                    _depenseService.Insert(c);
-//                    return c;
-//                }).ToList();
+            foreach (var c in GetDeps())
+                await _expenseService.Insert(c);
             
-            var deps = await _depenseService.DepensesMatching(DateTime.Now.AddDays(-10).Month).ConfigureAwait(false);
+            var deps = await _expenseService.DepensesMatching(DateTime.Now.AddDays(-10).Month).ConfigureAwait(false);
             _depenses = new ObservableCollection<Expense>(deps);
         }
 		

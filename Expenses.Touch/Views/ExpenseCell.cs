@@ -11,7 +11,7 @@ namespace Depenses.Touch
 {
     public class ExpenseCell : MvxTableViewCell
     {
-        public static NSString Identifier = new NSString("DepenseCell");
+        public static NSString Identifier = new NSString("ExpenseCell");
 
         private UILabel _womanAmount;
         private UILabel _menAmount;
