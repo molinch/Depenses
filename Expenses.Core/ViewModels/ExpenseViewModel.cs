@@ -56,9 +56,9 @@ namespace Depenses.Core.ViewModels
         {
             return new List<Expense>(new []
                 {
-                    new Expense{ ManExpense = 123, ExpenseDate = DateTime.Today.AddDays(-12), Details = "Truc de minic de merde"},
+                    new Expense{ ManExpense = 123, ExpenseDate = DateTime.Today.AddDays(-12), Details = "Courses Leclerc"},
                     new Expense{ ManExpense = 45.56, ExpenseDate = DateTime.Today.AddDays(-6) },
-                    new Expense{ ManExpense = 3.50, ExpenseDate = DateTime.Today.AddDays(-15), Details = "Truc de minic de merde, Truc de minic de merde, Truc de minic de merde"},
+                    new Expense{ ManExpense = 3.50, ExpenseDate = DateTime.Today.AddDays(-15), Details = "SFR Box"},
                 });
         }
     }
