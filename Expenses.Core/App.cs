@@ -1,5 +1,6 @@
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore;
+using System.Linq;
 
 namespace Depenses.Core
 {
@@ -7,11 +8,11 @@ namespace Depenses.Core
     {
         public override void Initialize()
         {
-            CreatableTypes()
-                .EndingWith("Service")
-                .AsInterfaces()
-                .RegisterAsLazySingleton();
-            
+			CreatableTypes().EndingWith("Service")
+				.Union(CreatableTypes().EndingWith("Repository"))
+				.AsInterfaces()
+				.RegisterAsLazySingleton();
+
             RegisterAppStart<ViewModels.ExpenseViewModel>();
         }
     }

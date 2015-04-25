@@ -26,11 +26,11 @@ namespace Expenses.Core.Repositories
         private Dictionary<string, SQLiteConnectionWithLock> _dbRealConnections = new Dictionary<string, SQLiteConnectionWithLock>();
         private const string DB_NAME = "expenses.db";
         private readonly SQLiteAsyncConnection _asyncConnection;
+		private bool _initialized;
 
         public BaseRepository()
         {
             _asyncConnection = new SQLiteAsyncConnection(GetRealDbConnection);
-            InitializeDb();
         }
 
         private SQLiteConnectionWithLock GetRealDbConnection()
@@ -56,17 +56,13 @@ namespace Expenses.Core.Repositories
             }
         }
 
-        private async void InitializeDb()
-        {
-            try
-            {
-                if (!await TableExistsAsync("expense"))
-                    await Connection.CreateTableAsync<Expense>();
-            }
-            catch (Exception ex)
-            {
-                Mvx.Error("Error occured during table creation : "+ex.Message);
-            }
+        protected async Task InitializeDb()
+		{
+			if (_initialized)
+				return;
+			
+			if (!await TableExistsAsync(typeof(T).Name))
+				await Connection.CreateTableAsync<T>();
         }
 
         protected SQLiteAsyncConnection Connection

@@ -24,6 +24,7 @@ namespace Expenses.Core.Repositories
 
         public async Task<List<Expense>> DepensesMatching(int month)
         {
+			await InitializeDb().ConfigureAwait(false);
             var deps = await Connection.Table<Expense>().ToListAsync().ConfigureAwait(false);
 
             return deps.Where(d => d.ExpenseDate.Month == month)
@@ -33,11 +34,13 @@ namespace Expenses.Core.Repositories
 
         public async Task Insert(Expense d)
         {
+			await InitializeDb().ConfigureAwait(false);
             await Connection.InsertAsync(d).ConfigureAwait(false);
         }
 
         public async Task Delete(Expense d)
         {
+			await InitializeDb().ConfigureAwait(false);
             await Connection.DeleteAsync(d).ConfigureAwait(false);
         }
     }
