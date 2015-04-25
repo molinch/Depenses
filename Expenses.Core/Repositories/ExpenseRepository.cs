@@ -15,10 +15,10 @@ namespace Expenses.Core.Repositories
         Task Delete(Expense d);
     }
 
-    public class ExpenseRepository : BaseRepository, IExpenseRepository
+    public class ExpenseRepository : BaseRepository<Expense>, IExpenseRepository
     {
         public ExpenseRepository()
-            : base("expenses.db")
+            : base()
         {
         }
 

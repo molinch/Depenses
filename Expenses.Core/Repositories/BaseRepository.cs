@@ -20,16 +20,15 @@ namespace Expenses.Core.Repositories
         string PersonalFolderPath { get; }
     }
 
-    public abstract class BaseRepository
+    public abstract class BaseRepository<T> where T : new()
     {
         private readonly static object _dbRealConnectionsLocker = new object();
         private Dictionary<string, SQLiteConnectionWithLock> _dbRealConnections = new Dictionary<string, SQLiteConnectionWithLock>();
-        private readonly string _databaseName;
+        private const string DB_NAME = "expenses.db";
         private readonly SQLiteAsyncConnection _asyncConnection;
 
-        public BaseRepository(string dbName)
+        public BaseRepository()
         {
-            _databaseName = dbName;
             _asyncConnection = new SQLiteAsyncConnection(GetRealDbConnection);
             InitializeDb();
         }
@@ -41,26 +40,33 @@ namespace Expenses.Core.Repositories
 
             lock (_dbRealConnectionsLocker)
             {
-                if (!_dbRealConnections.ContainsKey(_databaseName))
+                if (!_dbRealConnections.ContainsKey(DB_NAME))
                 {
-                    Mvx.Trace("Create connection to SQLite database " + _databaseName);
+                    Mvx.Trace("Create connection to SQLite database " + DB_NAME);
 
-                    var databasePath = System.IO.Path.Combine(folderService.PersonalFolderPath, _databaseName);
+                    var databasePath = System.IO.Path.Combine(folderService.PersonalFolderPath, DB_NAME);
 
-                    _dbRealConnections.Add(_databaseName, new SQLiteConnectionWithLock(dbService.GetSQLitePlatform(), new SQLiteConnectionString(databasePath, storeDateTimeAsTicks: true)));
+                    _dbRealConnections.Add(DB_NAME, new SQLiteConnectionWithLock(dbService.GetSQLitePlatform(), new SQLiteConnectionString(databasePath, storeDateTimeAsTicks: true)));
                 }
                 else
                 {
-                    Mvx.Trace("Reuse existing connection to SQLite database " + _databaseName);
+                    Mvx.Trace("Reuse existing connection to SQLite database " + DB_NAME);
                 }
-                return _dbRealConnections[_databaseName];
+                return _dbRealConnections[DB_NAME];
             }
         }
 
         private async void InitializeDb()
         {
-            if (!await TableExistsAsync("Expense"))
-                await Connection.CreateTableAsync<Expense>();
+            try
+            {
+                if (!await TableExistsAsync("expense"))
+                    await Connection.CreateTableAsync<Expense>();
+            }
+            catch (Exception ex)
+            {
+                Mvx.Error("Error occured during table creation : "+ex.Message);
+            }
         }
 
         protected SQLiteAsyncConnection Connection
