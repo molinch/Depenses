@@ -8,7 +8,7 @@ using Cirrious.CrossCore;
 using SQLite.Net.Async;
 using System.Linq;
 
-namespace Expenses.Core
+namespace Expenses.Core.Repositories
 {
     public interface IDbService
     {
@@ -23,7 +23,7 @@ namespace Expenses.Core
     public abstract class BaseRepository
     {
         private readonly static object _dbRealConnectionsLocker = new object();
-        private readonly static Dictionary<string, SQLiteConnectionWithLock> _dbRealConnections = new Dictionary<string, SQLiteConnectionWithLock>();
+        private Dictionary<string, SQLiteConnectionWithLock> _dbRealConnections = new Dictionary<string, SQLiteConnectionWithLock>();
         private readonly string _databaseName;
         private readonly SQLiteAsyncConnection _asyncConnection;
 
@@ -46,6 +46,7 @@ namespace Expenses.Core
                     Mvx.Trace("Create connection to SQLite database " + _databaseName);
 
                     var databasePath = System.IO.Path.Combine(folderService.PersonalFolderPath, _databaseName);
+
                     _dbRealConnections.Add(_databaseName, new SQLiteConnectionWithLock(dbService.GetSQLitePlatform(), new SQLiteConnectionString(databasePath, storeDateTimeAsTicks: true)));
                 }
                 else

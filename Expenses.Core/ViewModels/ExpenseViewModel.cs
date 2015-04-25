@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using Depenses.Core.Services;
 
 namespace Depenses.Core.ViewModels
 {
@@ -21,7 +22,7 @@ namespace Depenses.Core.ViewModels
         private async void LoadData()
         {
             foreach (var c in GetDeps())
-                await _expenseService.Insert(c);
+                await _expenseService.Insert(c).ConfigureAwait(false);
             
             var deps = await _expenseService.DepensesMatching(DateTime.Now.AddDays(-10).Month).ConfigureAwait(false);
             _depenses = new ObservableCollection<Expense>(deps);

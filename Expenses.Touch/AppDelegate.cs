@@ -7,6 +7,7 @@ using SQLite.Net.Interop;
 using SQLite.Net.Platform.XamarinIOS;
 using Expenses.Core;
 using Expenses.Touch;
+using Expenses.Core.Repositories;
 
 namespace Depenses.Touch
 {

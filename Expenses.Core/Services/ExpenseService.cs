@@ -6,8 +6,9 @@ using SQLite.Net.Async;
 using System.Threading.Tasks;
 using SQLite.Net.Interop;
 using Expenses.Core;
+using Expenses.Core.Repositories;
 
-namespace Depenses.Core
+namespace Depenses.Core.Services
 {
     public interface IExpenseService
     {

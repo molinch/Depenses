@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Depenses.Core;
 using System.Linq;
 
-namespace Expenses.Core
+namespace Expenses.Core.Repositories
 {
     public interface IExpenseRepository
     {
@@ -15,7 +15,7 @@ namespace Expenses.Core
         Task Delete(Expense d);
     }
 
-    public class ExpenseRepository : BaseRepository
+    public class ExpenseRepository : BaseRepository, IExpenseRepository
     {
         public ExpenseRepository()
             : base("expenses.db")

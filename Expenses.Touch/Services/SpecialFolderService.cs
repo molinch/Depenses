@@ -1,5 +1,6 @@
 ﻿using System;
 using Expenses.Core;
+using Expenses.Core.Repositories;
 
 namespace Expenses.Touch
 {
